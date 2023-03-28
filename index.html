@@ -1,3 +1,14 @@
 <h1>Welcome</h1>
 <p>Why do I know a bit of HTML?</p>
 <img src="https://media.discordapp.net/attachments/1016305880268013653/1090242984404078652/amazing_artwork.png?width=664&height=498" alt="penis">
+<script>
+  async function list_directory(user, repo, directory) {
+  const url = `https://api.github.com/repos/${user}/${repo}/git/trees/master`;
+  const list = await fetch(url).then(res => res.json());
+  const dir = list.tree.find(node => node.path === directory);
+  if (dir) {
+     const list = await fetch(dir.url).then(res => res.json());
+     return list.tree.map(node => node.path);
+  }
+}
+</script>
